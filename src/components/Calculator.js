@@ -135,7 +135,7 @@ const Calculator = () => {
                     <button
                         className=""
                         onClick={(e) => {
-                            alert("in development!!");g
+                            alert("in development!!");
                             // inputArray.pop();
                             // console.log("hehe" + inputArray);
                             // setDisplayArray([
