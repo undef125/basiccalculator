@@ -3,3 +3,11 @@
     width: 100vw;
     background-color: black;
 }
+
+@media screen and (min-width: 600px) {
+    .App {
+        margin: auto;
+        width: 60%;
+        height: 100vh;
+    }
+}

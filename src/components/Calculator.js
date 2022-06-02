@@ -17,7 +17,7 @@ const Calculator = () => {
         "-": (a, b) => {
             return a - b;
         },
-        "x": (a, b) => {
+        x: (a, b) => {
             return a * b;
         },
         "/": (a, b) => {
@@ -41,16 +41,20 @@ const Calculator = () => {
 
     const bODMASRule = (operatorSign) => {
         let indexArray = getIndexOf(operatorSign);
-        console.log(inputArray + " and " + indexArray);
-        let maintaining = 0;   //we are deleting 3 item and adding one means decreasing size of inputarray by 1 on one loop so maintaining index using this variable
+        let maintaining = 0; //we are deleting 3 item and adding one means decreasing size of inputarray by 1 on one loop so maintaining index using this variable
         for (let i = 0; i < indexArray.length; i++) {
-            let a = parseInt(inputArray[indexArray[i] - 1 - maintaining]);
-            let b = parseInt(inputArray[indexArray[i] + 1 - maintaining]);
-            console.log("a: " + a + "b: " + b + "i: " + i);
+            let a = parseFloat(inputArray[indexArray[i] - 1 - maintaining]);
+            let b = parseFloat(inputArray[indexArray[i] + 1 - maintaining]);
             try {
-                inputArray.splice(indexArray[i]-1 - maintaining, 3, operators[`${inputArray[indexArray[i] - maintaining]}`](a, b));
+                inputArray.splice(
+                    indexArray[i] - 1 - maintaining,
+                    3,
+                    operators[`${inputArray[indexArray[i] - maintaining]}`](
+                        a,
+                        b
+                    )
+                );
             } catch (err) {
-                console.log("Error: " + err);
                 document.querySelector(".result").textContent = "Error !!";
             }
             maintaining += 2;
@@ -59,7 +63,6 @@ const Calculator = () => {
     };
 
     const getResult = () => {
-        console.log(inputArray);
         bODMASRule("^");
         bODMASRule("x");
         bODMASRule("/");
@@ -75,7 +78,6 @@ const Calculator = () => {
     const onOperatorClick = (e) => {
         if (e.target.textContent === "=") {
             setDoubleEqualPressedCheck(doubleEqualPressedCheck + 1);
-            console.log("Equal Check: " + doubleEqualPressedCheck);
             if (doubleEqualPressedCheck >= 1) {
                 console.log("equal to pressed consecutively!!");
             } else {
@@ -92,8 +94,6 @@ const Calculator = () => {
                 : inputArray.push(tempArray.join(""));
             inputArray.push(e.target.textContent);
             tempArray = [];
-            console.log("checkingLastItem: " + inputArray);
-            console.log("checkingLastItemTemp: " + tempArray);
         }
     };
 
@@ -124,6 +124,9 @@ const Calculator = () => {
                         className=""
                         onClick={(e) => {
                             onOperatorClick(e);
+                            if(displayArray[displayArray.length-1] === '+') {
+                                inputArray.pop();
+                            }
                             setDisplayArray([
                                 ...displayArray,
                                 e.target.textContent,
@@ -135,15 +138,17 @@ const Calculator = () => {
                     <button
                         className=""
                         onClick={(e) => {
-                            alert("in development!!");
-                            // inputArray.pop();
-                            // console.log("hehe" + inputArray);
-                            // setDisplayArray([
-                            //     displayArray.slice(0,-1)
-                            // ]);
+                            tempArray.pop();
+                            if(displayArray[displayArray.length-1] === '+') {
+                                console.log("hehe")
+                                inputArray.pop();
+                            }
+                            setDisplayArray(
+                                displayArray.slice(0,-1)
+                                );
                         }}
                     >
-                      Del
+                        Del
                     </button>
                     <button
                         className="yellow"
@@ -321,7 +326,16 @@ const Calculator = () => {
                     >
                         0
                     </button>
-                    <button className="" onClick={(e) => onNumberClick(e)}>
+                    <button
+                        className=""
+                        onClick={(e) => {
+                            onNumberClick(e);
+                            setDisplayArray([
+                                ...displayArray,
+                                e.target.textContent,
+                            ]);
+                        }}
+                    >
                         .
                     </button>
                     <button
