@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 .display {
-    background-color: rgba(99, 99, 99, 0.395);
+    background-color: #5d6263;
     height: 30%;
+    border-radius: 10px;
 }
 .userInputs {
     height: 3rem;

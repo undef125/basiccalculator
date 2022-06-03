@@ -124,9 +124,6 @@ const Calculator = () => {
                         className=""
                         onClick={(e) => {
                             onOperatorClick(e);
-                            if(displayArray[displayArray.length-1] === '+') {
-                                inputArray.pop();
-                            }
                             setDisplayArray([
                                 ...displayArray,
                                 e.target.textContent,
@@ -139,13 +136,17 @@ const Calculator = () => {
                         className=""
                         onClick={(e) => {
                             tempArray.pop();
-                            if(displayArray[displayArray.length-1] === '+') {
-                                console.log("hehe")
+                            if (
+                                displayArray[displayArray.length - 1] === "x" ||
+                                displayArray[displayArray.length - 1] === "/" ||
+                                displayArray[displayArray.length - 1] === "+" ||
+                                displayArray[displayArray.length - 1] === "-" ||
+                                displayArray[displayArray.length - 1] === "^"
+                            ) {
+                                console.log("hehe");
                                 inputArray.pop();
                             }
-                            setDisplayArray(
-                                displayArray.slice(0,-1)
-                                );
+                            setDisplayArray(displayArray.slice(0, -1));
                         }}
                     >
                         Del
