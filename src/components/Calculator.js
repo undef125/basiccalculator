@@ -63,11 +63,12 @@ const Calculator = () => {
     };
 
     const getResult = () => {
+        console.log(inputArray)
         bODMASRule("^");
         bODMASRule("x");
         bODMASRule("/");
-        bODMASRule("+");
         bODMASRule("-");
+        bODMASRule("+");
     };
 
     const onNumberClick = (e) => {
