@@ -63,7 +63,6 @@ const Calculator = () => {
     };
 
     const getResult = () => {
-        console.log(inputArray)
         bODMASRule("^");
         bODMASRule("x");
         bODMASRule("/");
